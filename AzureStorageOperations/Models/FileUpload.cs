@@ -13,7 +13,7 @@ namespace AzureStorageOperations.Models
         public Uri FileURI { get; set; }
 
         public List<FileUpload> FileUploadList { get; set; }
-    }
+    }//sdfbgffasdfsdfds
     internal class FileBlock
     {
         public string Id
