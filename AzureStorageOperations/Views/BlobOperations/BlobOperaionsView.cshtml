@@ -1,0 +1,111 @@
+﻿@model AzureStorageOperations.Models.FileUpload
+
+@*<script src="~/Scripts/jquery-1.9.1.min.js"></script>*@
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+<style>
+    tr td:last-child {
+        width: 1%;
+        white-space: nowrap;
+    }
+</style>
+
+<script type="text/javascript">
+
+    @*$(document).ready(function () {
+        if('@ViewBag.Message' == 'File Uploaded Successfully')
+        {
+            alert('File Uploaded Successfully dfgdfbh dbfgjhsd'bfg dsrfgbdjfhg dsnfghjbdgbf');
+        }
+
+        if ('@ViewBag.Message' == 'File is already exists') {
+            alert('File is already exists');
+        }
+
+        $('#uloadTable td #openID').live('click', function () {
+            var filename = $(this).parent().parent().parent().attr('id');
+            $(this).parent().parent().parent().remove();
+            alert("hello");
+            $.ajax({
+                type: "post",
+                url: "/Home/RemoveUploadFile?fileName=" + filename,
+                datatype: "json",
+                traditional: true,
+                success: function (data) {
+                    alert('File Deleted');
+                    if (data == 0) {
+                        $('#uloadTable').remove();
+                    }
+                }
+            });
+        });
+    });*@
+
+    function Validate(e) {
+        if ($("#fileuploaderID").val() != "" && $("#fileuploaderID").val() != null) {
+            //return true;
+        }
+        else {
+            alert("Please select any file to upload....")
+            return false;
+        }
+    }
+</script>
+
+@{
+    ViewBag.Title = "FileUpload";
+}
+<h2>Manage Blobs</h2>
+
+@using (@Html.BeginForm("Index", "BlobOperations", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+{
+    <table>
+        <tr>
+            <td>
+                <input type="file" name="file_Uploader" id="fileuploaderID" />
+            </td>
+            <td style="width:15%">
+                <input type="submit" id="bttn_Upload" value="Upload" onclick="return Validate();" />
+            </td>
+        </tr>
+    </table>
+
+    if (Model.FileUploadList != null)
+    {
+        <div class="upload">
+            <div style="width: 500px;">
+                <table id="uloadTable" border="1">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.FileUploadList)
+                        {
+
+                            <tr id="@item.FileName">
+
+                                <td>@item.FileName</td>
+
+                                <td>
+                                    <a href="@Url.Action("DownloadBlob", "BlobOperations", new { @fileName = item.FileName })">
+                                        <input type="button" value="Download" id="openID" />
+                                        @*<img width="16" height="16" border="0" src="~/Images/view.png" class="viewc">*@
+                                    </a>
+
+                                    <a href="@Url.Action("RemoveUploadFile", "Home", new { @fileName = item.FileName })">
+                                        <input type="button" value="Delete" id="RemoveID" />
+                                        @*<img width="16" height="16" border="0" src="~/Images/Delete.png" class="link">*@
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+}
