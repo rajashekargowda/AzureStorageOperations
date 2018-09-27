@@ -25,7 +25,7 @@ namespace AzureStorageOperations.Controllers
     {
         CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
     CloudConfigurationManager.GetSetting("StorageConnectionString"));
-        private string sContainerName = "test1";
+        private string sContainerName = "test1"; //raj change
 
         private const int MaxBlockSize = 4000000;
 
