@@ -33,7 +33,7 @@ namespace AzureStorageOperations.Controllers
         public async Task<ActionResult> Index()
         {
             
-            FileUpload fileobj = new FileUpload();
+           // FileUpload fileobj = new FileUpload();
 
             fileobj = await GetAllBlobsFromAzureStorage();
             return View(fileobj);
