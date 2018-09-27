@@ -27,7 +27,7 @@ namespace AzureStorageOperations.Models
                       GetCanonicalizedResource(httpRequestMessage.RequestUri, storageAccountName),
                       md5);
 
-            // Now turn it into a byte array.
+            // Now turn it into a byte arraydssdfsdfsd
             byte[] SignatureBytes = Encoding.UTF8.GetBytes(MessageSignature);
 
             // Create the HMACSHA256 version of the storage key.
